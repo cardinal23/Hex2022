@@ -1,6 +1,6 @@
 extends Line2D
 
-var size = 40
+var size = 0
 
 func _init():
     antialiased = true
@@ -8,7 +8,10 @@ func _init():
     default_color = Color(0.4,0.4,0.4)
     
 func _ready():
-    var center = Vector2(position.x + size / 2, position.y + size / 2)
+    var center = Vector2(
+        position.x + size,
+        position.y + (sqrt(3) * size) / 2
+    )
     
     set_points(
         PoolVector2Array([
@@ -21,6 +24,14 @@ func _ready():
             corner(center, size, 0)
         ])
     )
+    
+func _draw():
+    print(position)
+    var debug := true
+    
+    if debug:
+        var borderRect = Rect2(position, Vector2(size * 2, sqrt(3) * size))
+        draw_rect(borderRect, Color.antiquewhite, false) 
     
 # From https://www.redblobgames.com/grids/hexagons/
 func corner(center, size, i):
