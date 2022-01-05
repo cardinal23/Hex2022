@@ -1,9 +1,10 @@
 extends Line2D
 
-var size = 0
+var size = 400
+var coordinates: Vector2
+onready var bounds = $Bounds
 
 func _init():
-    antialiased = true
     width = 2.0
     default_color = Color(0.4,0.4,0.4)
     
@@ -12,6 +13,8 @@ func _ready():
         position.x + size,
         position.y + (sqrt(3) * size) / 2
     )
+    
+    bounds.rect_min_size = Vector2(size, size)
     
     set_points(
         PoolVector2Array([
@@ -26,7 +29,7 @@ func _ready():
     )
     
 func _draw():
-    print(position)
+    #print(position)
     var debug := true
     
     if debug:
