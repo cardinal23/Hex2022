@@ -4,21 +4,23 @@ var Hex = preload("res://Hex.tscn")
 
 var hexes = {}
 
+var hexSize = 160
+var gridSize = Vector2(15,8)
+
 func _init():
-    var size = 80
-    var width = 2 * size
+    var size = hexSize / 2
+    var width = hexSize
     var height = sqrt(3) * size
     
-    for y in 8:
-        for x in 15:
-            # Everything needed to be divided in half here and I don't know why :(
-            var oddVerticalOffset = (x % 2) * (height / 2)
+    for y in gridSize.y:
+        for x in gridSize.x:
+            var oddVerticalOffset = (x % 2) * (height)
         
             var hex = Hex.instance()
             hex.size = size
             hex.position = Vector2(
-                (width * 0.75) * x / 2,
-                (height * y / 2) + oddVerticalOffset / 2
+                (width * 0.75) * x,
+                (height * y) + oddVerticalOffset / 2
             )
             add_child(hex)
             var coordinates = Vector2(x,y)

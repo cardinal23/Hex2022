@@ -2,19 +2,22 @@ extends Line2D
 
 var size = 400
 var coordinates: Vector2
+
 onready var bounds = $Bounds
+onready var coordinatesLabel = $Bounds/CoordinatesLabel
+
+var debug := true
 
 func _init():
-    width = 2.0
+    width = 1.0
     default_color = Color(0.4,0.4,0.4)
     
 func _ready():
-    var center = Vector2(
-        position.x + size,
-        position.y + (sqrt(3) * size) / 2
-    )
+    var center = Vector2(size, (sqrt(3) * size) / 2)
+    bounds.rect_min_size = Vector2(size * 2, sqrt(3) * size)
     
-    bounds.rect_min_size = Vector2(size, size)
+    var coordinatesText = "%d,%d" % [coordinates.x, coordinates.y]
+    coordinatesLabel.text = coordinatesText
     
     set_points(
         PoolVector2Array([
@@ -28,14 +31,9 @@ func _ready():
         ])
     )
     
-func _draw():
-    #print(position)
-    var debug := true
-    
-    if debug:
-        var borderRect = Rect2(position, Vector2(size * 2, sqrt(3) * size))
-        draw_rect(borderRect, Color.antiquewhite, false) 
-    
+    #bounds.editor_only = !debug
+    coordinatesLabel.visible = debug
+          
 # From https://www.redblobgames.com/grids/hexagons/
 func corner(center, size, i):
     var angleDeg = 60 * i
