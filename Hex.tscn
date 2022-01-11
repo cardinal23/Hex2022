@@ -13,14 +13,10 @@ __meta__ = {
 }
 
 [node name="CoordinatesLabel" type="Label" parent="Bounds"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 margin_right = 40.0
 margin_bottom = 31.0
 rect_scale = Vector2( 2, 2 )
-text = "0,0
+text = "66,66
 "
 __meta__ = {
 "_edit_use_anchors_": false

@@ -14,7 +14,7 @@ func _init():
     
     for y in gridSize.y:
         for x in gridSize.x:
-            var oddVerticalOffset = (x % 2) * (height)
+            var oddVerticalOffset = (x&1) * (height)
         
             var hex = Hex.instance()
             hex.size = size
@@ -30,4 +30,21 @@ func _init():
 func _input(event):
     if event is InputEventMouseMotion:
         print(event.position)
+        
+# Hex grid functions
+
+# https://www.redblobgames.com/grids/hexagons/#coordinates-axial
+func oddqToAxial(coordinates):
+    var q = coordinates.x
+    var r = coordinates.y - (coordinates.y - (coordinates.y&1)) / 2
+    return Vector2(q, r)
+    
+func axialToOddq(axialCoordinates):
+    var q = axialCoordinates.x
+    var r = axialCoordinates.y
+    
+    var x = q
+    var y = r + (q - (q&1)) / 2
+    
+    return Vector2(x,y)
     

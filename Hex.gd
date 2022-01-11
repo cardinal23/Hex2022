@@ -18,6 +18,10 @@ func _ready():
     
     var coordinatesText = "%d,%d" % [coordinates.x, coordinates.y]
     coordinatesLabel.text = coordinatesText
+    coordinatesLabel.rect_position = Vector2(
+        center.x - coordinatesLabel.rect_size.x / 2,
+        center.y - coordinatesLabel.rect_size.y / 2
+    )
     
     set_points(
         PoolVector2Array([
