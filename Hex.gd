@@ -21,13 +21,13 @@ func _ready():
     
     set_points(
         PoolVector2Array([
-            corner(center, size, 0),
-            corner(center, size, 1),
-            corner(center, size, 2),
-            corner(center, size, 3),
-            corner(center, size, 4),
-            corner(center, size, 5),
-            corner(center, size, 0)
+            corner(center, 0),
+            corner(center, 1),
+            corner(center, 2),
+            corner(center, 3),
+            corner(center, 4),
+            corner(center, 5),
+            corner(center, 0)
         ])
     )
     
@@ -35,7 +35,7 @@ func _ready():
     coordinatesLabel.visible = debug
           
 # From https://www.redblobgames.com/grids/hexagons/
-func corner(center, size, i):
+func corner(center, i):
     var angleDeg = 60 * i
     var angleRad = PI / 180 * angleDeg
     return Vector2(
