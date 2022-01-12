@@ -12,6 +12,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AxialCoordinatesLabel" type="Label" parent="Bounds"]
+margin_right = 40.0
+margin_bottom = 31.0
+rect_scale = Vector2( 2, 2 )
+text = "66,66
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CoordinatesLabel" type="Label" parent="Bounds"]
 margin_right = 40.0
 margin_bottom = 31.0
