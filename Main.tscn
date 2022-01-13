@@ -5,7 +5,5 @@
 [node name="Main" type="Node2D"]
 
 [node name="Grid" parent="." instance=ExtResource( 1 )]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 50.0
-margin_bottom = 50.0
+margin_left = 100.0
+margin_top = 100.0

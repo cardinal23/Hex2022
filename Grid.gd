@@ -32,19 +32,34 @@ func _init():
             
 func _input(event):
     if event is InputEventMouseMotion:
-        var eventCoordinates = pixel_to_flat_hex(event.position)
+        var localPosition = get_local_mouse_position()
+        var eventCoordinates = pixel_to_flat_hex(localPosition)
+        
         highlightHex(eventCoordinates)
-        print(eventCoordinates)
+        
+        var coordString = "(%s,%s) (%s,%s)" % [
+            localPosition.x,
+            localPosition.y,
+            eventCoordinates.x,
+            eventCoordinates.y
+        ]
+        
+        print(coordString)
+
         
 func highlightHex(coordinates):
-    if !hexes.has(coordinates) || coordinates == highlightedHex:
+    # Hex is already highlighted, do nothing
+    if coordinates == highlightedHex:
         return 
-     
+    
     if highlightedHex != null:
         var hex = hexes[highlightedHex]
         hex.isHighlighted = false
         hex.update()
            
+    if !hexes.has(coordinates):
+        return 
+        
     var hex = hexes[coordinates]
     highlightedHex = coordinates
     hex.isHighlighted = true
@@ -54,8 +69,8 @@ func highlightHex(coordinates):
 
 # https://www.redblobgames.com/grids/hexagons/#coordinates-axial
 func pixel_to_flat_hex(point):
-    var q = ( float(2)/3 * point.x                        ) / hexSize
-    var r = (float(-1)/3 * point.x  +  sqrt(3)/3 * point.y) / hexSize
+    var q = ( 2.0/3 * point.x                        ) / (hexSize / 2)
+    var r = (-1.0/3 * point.x  +  sqrt(3)/3 * point.y) / (hexSize / 2)
     return axial_to_oddq(axial_round(Vector2(q, r)))
 
 func oddq_to_axial(coordinates):
