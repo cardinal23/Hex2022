@@ -37,16 +37,6 @@ func _input(event):
         
         highlightHex(eventCoordinates)
         
-        var coordString = "(%s,%s) (%s,%s)" % [
-            localPosition.x,
-            localPosition.y,
-            eventCoordinates.x,
-            eventCoordinates.y
-        ]
-        
-        print(coordString)
-
-        
 func highlightHex(coordinates):
     # Hex is already highlighted, do nothing
     if coordinates == highlightedHex:
@@ -69,8 +59,11 @@ func highlightHex(coordinates):
 
 # https://www.redblobgames.com/grids/hexagons/#coordinates-axial
 func pixel_to_flat_hex(point):
-    var q = ( 2.0/3 * point.x                        ) / (hexSize / 2)
-    var r = (-1.0/3 * point.x  +  sqrt(3)/3 * point.y) / (hexSize / 2)
+    var x = point.x - hexSize / 2
+    var y = point.y - hexSize / 2
+    
+    var q = (2.0/3 * x) / (hexSize / 2)
+    var r = (-1.0/3 * x  +  sqrt(3)/3 * y) / (hexSize / 2)
     return axial_to_oddq(axial_round(Vector2(q, r)))
 
 func oddq_to_axial(coordinates):
@@ -102,7 +95,7 @@ func cube_round(frac):
         r = -q-s
     else:
         s = -q-r
-
+    
     return Vector3(q, r, s)
     
 func axial_round(hex):
