@@ -9,7 +9,7 @@ onready var bounds = $Bounds
 onready var coordinatesLabel = $Bounds/CoordinatesLabel
 onready var axialCoordinatesLabel = $Bounds/AxialCoordinatesLabel
 
-var debug := true
+var debug := false
 var isHighlighted := false
 
 func _init():
@@ -47,6 +47,7 @@ func _ready():
     
     #bounds.editor_only = !debug
     coordinatesLabel.visible = debug
+    axialCoordinatesLabel.visible = debug
     
     update()
     
