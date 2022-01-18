@@ -5,7 +5,7 @@ var Hex = preload("res://Hex.tscn")
 var hexes = {}
 
 var hexSize = 160
-var gridSize = Vector2(5,5)
+var gridSize = Vector2(14,6)
 
 var highlightedHex: Vector2
 
@@ -59,12 +59,18 @@ func highlightHex(coordinates):
 
 # https://www.redblobgames.com/grids/hexagons/#coordinates-axial
 func pixel_to_flat_hex(point):
-    var x = point.x - hexSize / 2
-    var y = point.y - hexSize / 2
-    
-    var q = (2.0/3 * x) / (hexSize / 2)
-    var r = (-1.0/3 * x  +  sqrt(3)/3 * y) / (hexSize / 2)
+    var size = hexSize / 2
+    var x = point.x - size
+    var y = point.y - size
+    var q = (2.0/3 * x) / size
+    var r = (-1.0/3 * x  +  sqrt(3)/3 * y) / size
     return axial_to_oddq(axial_round(Vector2(q, r)))
+    
+func flat_hex_to_pixel(hex):
+    var size = hexSize / 2
+    var x = size * (3.0/2 * hex.x)
+    var y = size * (sqrt(3)/2 * hex.x  +  sqrt(3) * hex.y)
+    return Vector2(x, y)
 
 func oddq_to_axial(coordinates):
     var q = coordinates.x
